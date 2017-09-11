@@ -1,0 +1,32 @@
+
+.overflow-auto {
+  overflow: auto;
+}
+
+.row-fluid .span3 {
+    width: 19.076%;
+    *width: 23.351063829787233%;
+}
+
+.row-fluid .span9 {
+    width: 79.46808510638297%;
+    *width: 74.41489361702126%;
+}
+
+.fullnm_width {
+	width: 350px;
+}
+
+.idmemb_width {
+	width: 120px;
+}
+
+
+.fullnm_double_input {
+	width: 265px;
+}
+
+.span_fullnm_double_input {
+	width: 40px;
+}
+

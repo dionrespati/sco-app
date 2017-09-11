@@ -1,0 +1,18 @@
+/* 
+    Document   : main
+    Created on : Oct 16, 2012, 12:24:42 PM
+    Author     : sahid
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+.list_button{
+    list-style-type: none;
+}
+.list_button li{
+    padding: 2px 0px 2px 0px;
+}
+.width_button{
+	width: 160px;
+	text-align: left;
+}
