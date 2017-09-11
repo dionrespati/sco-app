@@ -12,7 +12,7 @@ class MY_Controller extends CI_Controller {
 		$this->stockist = $this->session->userdata('stockist');
 		$this->stockistnm = $this->session->userdata('stockistnm');
 		$this->pricecode = $this->session->userdata('pricecode');	
-		$this->pricecode = $this->session->userdata('pricecode');
+		//$this->pricecode = $this->session->userdata('pricecode');
 		$this->kodegudang = $this->session->userdata('kodegudang');
 	 }
 	 public function getStoreInfo() {
