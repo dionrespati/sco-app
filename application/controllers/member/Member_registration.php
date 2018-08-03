@@ -88,13 +88,12 @@ class Member_registration extends MY_Controller {
 		   		//Check sponsor & rekruiter	
 		   		$idsponsor = $this->m_api->checkValidIdMember($data['idsponsor']);
 		   		$idrekruit = $this->m_api->checkValidIdMember($data['idrekrut']);	
-				//$cekNoKtp  = $this->m_api->memberCheckExistingRecordByField("idno", $data['noktp']);
 				//Jika memilih pending voucher	
 				if($data['chosevoucher'] == "0") {
 					//Check Limit starterkit pending voucher
 				   	$cekLimit = $this->m_member_reg->cekLimitKit($this->stockist);
 				   	if($cekLimit != null && $cekLimit[0]->arkit < 1) {
-				   		print_r($cekLimit);
+				   		//print_r($cekLimit);
 				   		$data['err'] = "Limit starterkit : ".$cekLimit[0]->arkit;
 				   		$cnterr++;
 				   	}
@@ -140,28 +139,33 @@ class Member_registration extends MY_Controller {
 		try {
 		   	  $check = $this->checkValidation($data);
 			  $cekNoKtp  = $this->m_api->memberCheckExistingRecordByField("idno", $data['noktp']);
+		      $cekNohP  =  $this->m_api->memberCheckExistingRecordByField("tel_hp", $data['tel_hp']);
+			  
 			  //Single member registration
 			  if($data['tipe_input'] == "1") {	
 			      $lastkit = $this->m_member_reg->showLastkitno($this->stockist);
 				  if($lastkit != null) {
-									 
+				     //echo "dsdsd";		 
 					 if($lastkit[0]->lastkitno < 99999) {
-						$this->processInputMember($lastkit, $data);
-					 //end if($lastkit[0]->lastkitno < 99999)
+						$arr = $this->processInputMember($lastkit, $data);
 					 } 	else {
 						$setLastKid = $this->m_member_reg->setLastKitToZero($this->stockist);
                         $lastkit = $this->m_member_reg->showLastkitno($this->stockist);
-						$this->processInputMember($lastkit, $data);						
+						$arr = $this->processInputMember($lastkit, $data);						
 					 }
+					 
+					 $arr = jsonTrueResponse($insMemb);
+				  } else {
+					 $arr = jsonFalseResponse("Error Lastkitno..");
 				  }
 		      //end if($data['tipe_input'] == "1")	  
 			  } else {
 			  //Couple member registration	
 			  }
 		} catch(Exception $e) {
-			
+			$arr = jsonFalseResponse($e->getMessage());
 		}
-		
+		echo json_encode($arr);
     }
 
 	private function processInputMember($lastkit, $data) {
@@ -189,15 +193,21 @@ class Member_registration extends MY_Controller {
 	        		$data['upd_skit'] = $this->m_member_reg->update_limitkit($this->stockist);
 	        	}   
 	            //$upd_skit = $this->m_member->update_starterkit($new_id);
-	            $data['show_new_member'] = $this->m_member_reg->show_new_member($new_id);
-	            //print_r($data['show_new_member']);
-			    //echo $data['idnoo'];
-	            $this->load->view($this->folderView.'memberRegInputResult', $data);
+	            $res = jsonFalseResponse("Data member $new_id tidak ditemukan..");
+	            $insMemb = $this->m_member_reg->show_new_member($new_id);
+				if($insMemb != null) {
+					$res = jsonTrueResponse($insMemb);
+				}
+	            //$this->load->view($this->folderView.'memberRegInputResult', $data);
 	            
 	        } else {
 	            $dec_lastkitno = $this->m_member_reg->DecrementingLastKitNo($this->stockist);
+				$res = jsonFalseResponse("Input member gagal..");
 	        }  
-	    } //if($updlastkitno > 0) 
+	    } else {
+	    	$res = jsonFalseResponse("Update lastkit gagal..");
+	    }
+		return $res; 
 	    
 	}
 

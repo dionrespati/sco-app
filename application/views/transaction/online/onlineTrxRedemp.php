@@ -8,7 +8,7 @@ $stkname = $this -> session -> userdata("stockistnm");
 		<fieldset>
 			<div class="control-group">
 				
-				<label class="control-label" for="typeahead">Search By</label>
+				<label class="control-label" for="typeahead">Pencarian</label>
 				<div class="controls">
 					
 					<select tabindex="1" class="span3 typeahead" id="searchs" name="searchs">
@@ -18,7 +18,7 @@ $stkname = $this -> session -> userdata("stockistnm");
 	                </select>
 				</div>
 				<div class="clearfix"></div>
-				<label class="control-label" for="typeahead">Bonus Month</label>
+				<label class="control-label" for="typeahead">Bonus Period</label>
 				<div class="controls">
 					<select tabindex="2" class="span3 typeahead" id="bnsmonth"  name="bnsmonth">
                         <?php
@@ -31,7 +31,7 @@ $stkname = $this -> session -> userdata("stockistnm");
 				</div>
 				<label class="control-label" for="typeahead">&nbsp;</label>
 				<div class="controls">
-					<input type="button" tabindex="3" class="btn btn-primary" onclick="All.ajaxFormPost(this.form.id,'sales/ol/redemp/list')" name="submit" value="Search"/>
+					<input type="button" tabindex="3" class="btn btn-success" onclick="All.ajaxFormPost(this.form.id,'sales/ol/redemp/list')" name="submit" value="Cari"/>
 				</div>
 			<!-- end control-group -->
           </div><!-- end control-group -->

@@ -111,6 +111,8 @@ class Sales_stockist_model extends MY_Model {
     	$datee = date("m/d/Y");
         $month = date("m");
         $year = date("Y");
+		
+		$threeDigit = substr($vchnoo, 0, 3); 
        // $vchnoo1 = substr($vchnoo,0,1);
        
         /*$qry = "SELECT a.claimstatus, 
@@ -123,10 +125,15 @@ class Sales_stockist_model extends MY_Model {
                 and a.claimstatus = '0' 
                 and MONTH(a.ExpireDate) >= '".$month."' and year(a.ExpireDate) = '".$year."'
                 and a.vchtype = 'C'";*/
+		$fieldCek = "VoucherNo";
+		if($vchtype == "C") {
+			$fieldCek = "voucherkey";
+		}	
 				
 		$qry = "SELECT a.claimstatus, 
 				       a.DistributorCode, a.VoucherNo as VoucherNo,
-				       a.vchtype,a.VoucherAmt, a.vchtype,
+				       a.vchtype,a.VoucherAmt, a.vchtype, a.loccd,
+					   CONVERT(char(10), a.claim_date,126) as claim_date,
 				       CONVERT(char(10), a.ExpireDate,126) as ExpireDate,
 				       CONVERT(char(10), GETDATE(),126) as nowDate,
 				       CASE 
@@ -134,11 +141,18 @@ class Sales_stockist_model extends MY_Model {
 				           ELSE '0'
 				       END AS status_expire
                 FROM tcvoucher a
-                WHERE a.VoucherNo = '".$vchnoo."' and a.DistributorCode = '".$distributorcode."' AND a.vchtype = '$vchtype'
+                WHERE a.$fieldCek = '".$vchnoo."' and a.DistributorCode = '".$distributorcode."' AND a.vchtype = '$vchtype'
                 ";
         //echo $qry;
-		$res = $this->getRecordset($qry, null, $this->db1);
-		return $res;
+		$res = $this->getRecordset($qry, null, $this->db2);
+		
+		$res2 = null;
+		if($res != null && $threeDigit == "XPV" || $threeDigit == "ZVO" || $threeDigit == "XPP") {
+			$detProd = "SELECT * FROM TWA_KLPromo_Oct17_D WHERE Voucherno = '$vchnoo'";
+			$res2 = $this->getRecordset($detProd, null, $this->db2);
+		}
+		
+		return array("arrayData" => $res, "detProd" => $res2);
     }
     
     function saveTrx($data) {

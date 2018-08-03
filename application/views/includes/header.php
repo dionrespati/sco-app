@@ -124,6 +124,7 @@
 	<script src="<?php echo base_url('assets/js_module/member.js')?>" ></script>
 	<script src="<?php echo base_url('assets/js_module/warehouse.js')?>" ></script>
 	<script src="<?php echo base_url('assets/js_module/stockbarcode.js')?>" ></script>
+	<script src="<?php echo base_url('assets/js_module/paystk.js')?>" ></script>
 	<!--<script src="<?php echo base_url('js/ks_module.js')?>" ></script>
   <body> 
   <!--<![endif]-->

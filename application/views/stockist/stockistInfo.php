@@ -5,7 +5,7 @@
         <tr>
         	<th colspan="2">
         		<?php
-        		   echo " INFORMASI";
+        		   echo " INFORMASI ";
         		   if($this->groupid == "3") {	
         		   	   echo "STOCKIST ";	
         		   } else if($this->groupid == "4") {

@@ -1,11 +1,10 @@
 <?php
-
 //print_r($header);
 ?>
 <form>
  <table width="100%" class="table table-striped table-bordered bootstrap-datatable datatable">
     <thead>
-        <tr style="background-color: #f4f4f4;"><th colspan="4">Stockist Sales Report</th></tr>
+        <tr style="background-color: #f4f4f4;"><th colspan="4">STOCKIST SALES REPORT</th></tr>
         <tr>
             <td width="15%">Main Stockist Code</td>
             <td width="35%">
@@ -22,7 +21,7 @@
             	<?php echo $header[0]->loccd_name; ?>
             </td>
             <td>Bonus Period</td>
-            <td>&nbsp;</td>
+            <td><?php echo $header[0]->bnsperiod;?></td>
         </tr>
         <tr>
             <td>C/O Stockist Code</td>
@@ -65,10 +64,13 @@
   <table width="100%" class="table table-striped table-bordered bootstrap-datatable datatable">
   	<thead>
   		<tr>
+  			<th colspan="6">DAFTAR TRANSAKSI/TTP MEMBER</th>
+  		</tr>
+  		<tr>
   			<th width="6%">No</th>
-            <th width="10%">Trx No</th>
-            <th width="20%">Distributor Code</th>
-            <th>Distributor Name</th>
+            <th width="10%">No Trx</th>
+            <th width="20%">ID Distributor</th>
+            <th>Nama Distributor</th>
             <th width="15%">DP</th>
             <th width="10%">BV</th>
         </tr>
@@ -92,13 +94,16 @@
   	 ?>	
   	</tbody>	 
   </table>		  
-  <table width="100%" class="table table-striped table-bordered bootstrap-datatable datatable">
+  <table width="70%" class="table table-striped table-bordered bootstrap-datatable datatable">
   	<thead>
   		<tr>
-            <th>&nbsp;No</th>
-            <th>&nbsp;Product Code</th>
-            <th>&nbsp;Product Name</th>
-            <th>&nbsp;Qty</th>
+  			<th colspan="4">REKAP PEMBELANJAAN PRODUK</th>
+  		</tr>
+  		<tr>
+            <th width="6%">No</th>
+            <th width="20%">Kode Produk</th>
+            <th>Nama Produk</th>
+            <th width="10%">Qty</th>
         </tr>
       </thead>
   	</thead>

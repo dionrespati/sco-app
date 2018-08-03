@@ -76,15 +76,15 @@ class Member_report_model extends MY_Model {
 				AND a.batchno = '$mmno'"; */
 				
 		$qry = "SELECT CONVERT(VARCHAR(30), b.etdt, 103) AS etdt, a.invoiceno, a.registerno,
-		       a.receiptno, a.batchscno, b.dfno, c.fullnm, CONVERT(VARCHAR(30), c.jointdt, 103) AS jointdt, c.sponsorid, c.sponsorregid,
-		       CONVERT(VARCHAR(10), b.batchdt, 20) as batchdt
-		FROM ordivtrh a
-		     INNER JOIN sc_newtrh b ON (a.batchscno = b.batchno)
-		     INNER JOIN msmemb c ON (b.dfno = c.dfno)
-		WHERE b.ttptype LIKE 'MEMB%' AND 
-		a.invoiceno = '$mmno'
-		AND a.batchscno != '' AND a.batchscno is not null 
-		ORDER BY b.etdt";
+				       a.receiptno, a.batchscno, b.dfno, c.fullnm, CONVERT(VARCHAR(30), c.jointdt, 103) AS jointdt, c.sponsorid, c.sponsorregid,
+				       CONVERT(VARCHAR(10), b.batchdt, 20) as batchdt
+				FROM ordivtrh a
+				     LEFT OUTER JOIN sc_newtrh b ON (a.batchscno = b.batchno)
+				     INNER JOIN msmemb c ON (b.dfno = c.dfno)
+				WHERE b.ttptype LIKE 'MEMB%' AND 
+				a.invoiceno = '$mmno'
+				AND a.batchscno != '' AND a.batchscno is not null 
+				ORDER BY b.etdt";
 		//echo $qry;
 		$result = $this->getRecordset($qry,null,$this->db2);
 	    return $result;

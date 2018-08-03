@@ -14,7 +14,7 @@ class Stockist extends MY_Controller {
 		$data['form_reload'] = 'stockist/addr';
 		$data['form_header'] = "Update Address Stockist";  
 		$data['form_action'] = base_url('stockist/addr/update'); 		
-        
+        //print_r($this->session->all_userdata());
         if($this->username != null) {	           
 		   //cek apakah group adalah ADMIN atau BID06
 		   if($this->stockist == "BID06") {

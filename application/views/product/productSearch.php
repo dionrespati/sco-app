@@ -4,10 +4,13 @@
       <div class="control-group">
       	<label class="control-label" for="typeahead">Pencarian</label>
       	<div class="controls">
-      		<select id="param" name="param">
+      		<select id="param" name="param" class="span4">
       			<option value="prdcd">Kode Produk</option>
       			<option value="prdnm">Nama Produk</option>
       			<option value="F">Daftar Kode Produk Free</option>
+      			<option value="knet">Daftar Produk K-Net</option>
+      			<option value="non_knet">Daftar Produk Non K-Net</option>
+      			<option value="dis">Daftar Produk Inden / Discontinue</option>
       			<!--<option value="P">List Product Bundling</option>-->
       		</select>	
       	</div>

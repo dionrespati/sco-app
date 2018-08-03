@@ -9,15 +9,15 @@ if($result == null) {
 		//if($form['searchby'] == "sc_dfno" ||) {
 		?>	
 			<tr bgcolor=#f4f4f4>
-				<th colspan="10">List Generated Transaction By Stockist <?php echo $form['sc_dfno']; ?></th>
+				<th colspan="10">LAPORAN TRANSAKSI YANG SUDAH DI GENERATE ( <?php echo $form['sc_dfno']; ?> )</th>
 			</tr>
 			<tr bgcolor=#f4f4f4>
 				<th width="5%">No</th>
-				<th width="13%">SSR/MSR No</th>
-				<th width="10%">SSR Date</th>
+				<th width="13%">No.SSR/MSR</th>
+				<th width="10%">Tgl SSR</th>
 				<th width="10%">Stk</th>
-				<th>Stk Name</th>
-				<th width="10%">C/O</th>
+				<th>Nama Stk</th>
+				<th width="10%">C/O Stk</th>
 				<!--<th width="10%">SC</th>-->
 				<th width="10%">Total DP</th>
 				<th width="6%">BV</th>
@@ -31,13 +31,13 @@ if($result == null) {
 		    foreach($result as $dta) {
 		    if($dta->flag_batch == "1") {
 					$stt = "PENDING";
-				    $wrn = "";
+				    //$wrn = "";
 				} else if($dta->flag_batch == "2") {
 					$stt = "APPROVED";
-					$wrn = "bgcolor=lightgreen";
+					//$wrn = "bgcolor=lightgreen";
 				}		
 				
-			echo "<tr $wrn id=\"$i\">
+			echo "<tr id=\"$i\">
 				<td align=right>$i</td>
 				<td align=\"center\">
 				    <input type=hidden id=\"batchno$i\" value=\"$dta->batchno\" />

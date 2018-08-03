@@ -70,11 +70,11 @@ class Sales_stockist_report extends MY_Controller {
             //$username = $this->session->userdata('username');          
             if($x['searchBy'] == "VoucherNo") {
                 $x['result'] =  $this->m_ssr->getVoucherReportList($x['searchBy'], $x['paramVchValue']);
-				//	print_r($x['result']);
+				//print_r($x['result']);
                 $this->load->view($this->folderView.'listVchReportByVoucherNo',$x);
             } else if($x['searchBy'] == "DistributorCode") {
             	$x['result'] =  $this->m_ssr->getVoucherReportList($x['searchBy'], $x['paramVchValue']);
-                //print_r($x['idstk']);
+                //print_r($x['result']);
                 $this->load->view($this->folderView.'listVchReportByIdMember',$x);
             } 
         }else{
