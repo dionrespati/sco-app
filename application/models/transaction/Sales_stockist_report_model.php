@@ -70,7 +70,7 @@ class Sales_stockist_report_model extends MY_Model {
 	
 	function getVoucherReportList($field, $value) {
 		$qry = "SELECT a.claimstatus, c.trcd, d.batchno, d.batchdt, d.loccd,
-				       a.DistributorCode, b.fullnm, a.VoucherNo as VoucherNo,
+				       a.DistributorCode, b.fullnm, a.voucherkey, a.VoucherNo as VoucherNo,
 				       a.vchtype,a.VoucherAmt,
 				       CONVERT(char(10), d.createdt, 126) as tglklaim,
 				       CONVERT(char(10), a.ExpireDate,126) as ExpireDate,
@@ -82,8 +82,14 @@ class Sales_stockist_report_model extends MY_Model {
 				FROM tcvoucher a
 				INNER JOIN msmemb b ON (a.DistributorCode = b.dfno)
 				LEFT JOIN sc_newtrp c ON (a.VoucherNo = c.docno)
-				LEFT JOIN sc_newtrh d ON (c.trcd = d.trcd)
+				LEFT JOIN sc_newtrh d ON ( d.trcd = 
+					CASE
+	                    WHEN c.trcd is null THEN '0'
+	                    WHEN c.trcd is not null THEN c.trcd   
+	                END
+				)
 				WHERE a.$field = '".$value."'";	
+		//echo $qry;		
 		return $this->getRecordset($qry, null, $this->db2);
 	}
 }

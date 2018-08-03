@@ -1570,3 +1570,38 @@ if(! function_exists('set_list_array_to_stringCart')) {
 				});
 			</script>";
 	}
+	
+	function link_js_sgo($tipe) {
+		if($tipe == "dev") {
+			$str = "<script type=\"text/javascript\" src=\"https://sandbox-kit.espay.id/public/signature/js\"></script>";
+		} else if($tipe == "prod"){
+			//<script type="text/javascript" src="https://secure.sgo.co.id/public/signature/js"></script>
+			//$str = "<script type=\"text/javascript\" src=\"https://kit.espay.id/public/signature/js\"></script>";
+			$str = "<script type=\"text/javascript\" src=\"https://secure.sgo.co.id/public/signature/js\"></script>";
+		}
+		return $str;
+	}
+	
+	function createTable($array) {
+		$header = "&nbsp;";
+		if(in_array("title", $array)) {
+			$header = $array['header'];
+		}
+		
+		if(!in_array("columns", $array)) {
+			echo "Column harus diisi";
+		} 
+		
+		
+		$str = "<table>";
+		$str = "<thead>";
+		$count = count($columns);
+		$str .= "<tr>";
+		for($i=0;$i<$columns;$i++) {
+			$str .= "<th>$columns[$i]</th>";
+		}
+		$str .= "</tr>";
+		$str = "<thead>";
+		
+		$str .= "</table>";
+	}

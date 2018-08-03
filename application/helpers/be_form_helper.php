@@ -113,6 +113,7 @@ if (!function_exists('htmlFormElement')) {
 			$label = $form['formElement'][$i]['label'];
 			$inputType = $form['formElement'][$i]['type'];
 			$inputName = array_key_exists("name", $form['formElement'][$i]) ? $form['formElement'][$i]['name'] : strtolower($label);
+			$inputId = array_key_exists("id", $form['formElement'][$i]) ? $form['formElement'][$i]['id'] : $form['formElement'][$i]['name'];
 			$inputClass = array_key_exists("class", $form['formElement'][$i]) ? $form['formElement'][$i]['class'] : "span5";
 			$options = array_key_exists("options", $form['formElement'][$i]) ? $form['formElement'][$i]['options'] : NULL;
 			$maxlength = array_key_exists("maxlength", $form['formElement'][$i]) ? "maxlength=".$form['formElement'][$i]['maxlength'] : NULL;
@@ -225,8 +226,8 @@ if (!function_exists('htmlFormElement')) {
 					]
 					*/
 					//$listOpt = $form['formElement'][$i]['options'];
-					$placeholder = array_key_exists("placeholder", $form['formElement'][$i]) ? $form['formElement'][$i]['placeholder'] : 'Pilih..';
-					$strInput = '<select name="'.$inputName.'" class="'.$inputClass.'" data-placeholder="'.$placeholder.'">';
+					//$placeholder = array_key_exists("placeholder", $form['formElement'][$i]) ? $form['formElement'][$i]['placeholder'] : 'Pilih..';
+					$strInput = '<select id="'.$inputId.'" name="'.$inputName.'" class="'.$inputClass.'">';
 					$defaultValue = array_key_exists("defaultValue", $form['formElement'][$i]) ? $form['formElement'][$i]['defaultValue'] : NULL;
 			  		for ($j = 0; $j < count($options); $j++) {
 							if ($options[$j]['value'] == $defaultValue) {

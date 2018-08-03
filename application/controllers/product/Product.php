@@ -31,10 +31,18 @@ class Product extends MY_Controller {
 			$res['result'] = $this->m_product->getProductByName($data['paramValue']);
 		} else if($data['param'] == "P") {
 			$res['result'] = $this->m_product->getListProductBundling($data['paramValue']);
-		} else {
+		} else if($data['param'] == "F") {
 			$res['result'] = $this->m_product->getListFreeProduct($data['paramValue']);
+		} else if($data['param'] == "dis") {
+			$res['result'] = $this->m_product->getListIndenProduct($data['paramValue']);
+		} else if($data['param'] == "non_knet") {
+			$res['result'] = $this->m_product->getListPrdKnet($data['paramValue'], "0");
+		} else if($data['param'] == "knet") {
+			$res['result'] = $this->m_product->getListPrdKnet($data['paramValue'], "1");
 		}
 		$this->load->view($this->folderView.'productDetailByID', $res);
+		
+		
 	}
 	
 	//$route['product/id/(:any)/(:any)'] = 'product/product/productSearchByID/$1/$2';

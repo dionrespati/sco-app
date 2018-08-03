@@ -12,9 +12,12 @@
                 echo "<tr id=\"$i\">";
 		        echo "<td><div align=right>$i<div></td>";
                 echo "<td><div align=center><input type=\"hidden\" id=\"menu_id$i\" value=\"$list->app_menu_id\" />$list->app_menu_id</div></td>";
-                echo "<td><div align=center>$list->app_menu_desc</div></td>";  
-                echo "<td><div align=center>$list->group_menu</div></td>";
-				echo "<td><div align=center>$list->menu_order</div></td>";
+                echo "<td width=\"30%\"><div align=center>$list->app_menu_desc</div></td>";  
+                echo "<td width=\"30%\"><div align=center>$list->group_menu</div></td>";
+				echo "<td width=\"4%\"><div align=center>
+				 <input type=\"text\" id=\"order$i\" value=\"$list->menu_order\" class=\"span20\" />
+				  
+				  </div></td>";
                 /*echo "<td><div align=\"center\">";
                 echo "<a class=\"btn btn-mini btn-info\" onclick=\"Gallery.getUpdateGallery($i)\"><i class=\"icon-edit icon-white\"></i></a>";
                 echo "&nbsp;<a class=\"btn btn-mini btn-danger\" onclick=\"Gallery.deleteGallery($i)\"><i class=\"icon-trash icon-white\"></i></a>";

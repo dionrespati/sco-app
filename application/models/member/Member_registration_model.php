@@ -353,7 +353,7 @@ class Member_registration_model extends MY_Model {
         
             //echo "QUERY STARTERKIT ".$insStarterkit."";
             //echo "<br /><br />";
-            $query3 = $this->db->query($insStarterkit);
+           $query3 = $this->db->query($insStarterkit);
             
         }
         else

@@ -3,7 +3,7 @@ echo "
 <form name=\"oke\" method=\"POST\" action=\"".site_url()."sales/ol/redemp/save\" target=\"_blank\">
 <table width=\"80%\" align=\"center\" class=\"table table-striped table-bordered bootstrap-datatable datatable\">
       <tr>
-        <th colspan=2>SUMMARY SALES</th>
+        <th colspan=2>REKAP TRANSAKSI PEMBELANJAAN</th>
       </tr>
       <tr>
         <td width=\"20%\" >ID STOCKIST </td>
@@ -23,17 +23,17 @@ echo "
       </tr>
       
       <tr>
-        <td>ORDER NO</td>
+        <td>NO TRANSAKSI</td>
         <td>".$main[0]->orderno."</td>
 		
       </tr>
       <tr>
-        <td>TOTAL PAY</td>
-        <td>".number_format($main[0]->total_pay,0,",",",")."</td>
+        <td>TOTAL HARGA</td>
+        <td>".number_format($main[0]->total_pay,0,",",".")."</td>
 		</tr>
       
       <tr>
-        <td>BONUS MONTH</td>
+        <td>PERIODE BONUS</td>
         <td>".$main[0]->bonusmonth."</td>
 		
       </tr>
@@ -41,17 +41,17 @@ echo "
     
 	<table width=\"80%\" class=\"table table-striped table-bordered bootstrap-datatable datatable\" align=\"center\">
 	  <tr>
-        <th colspan=8>DETAIL PRODUCT</th>
+        <th colspan=8>DETAIL PEMBELANJAAN PRODUK</th>
       </tr>
       <tr>
-        <th width=\"4%\" >NO</th>
-        <th width=\"15%\" >ID</th>
-        <th>PRODUCT</th>
-        <th>QTY</th>
+        <th width=\"4%\" >No</th>
+        <th width=\"15%\" >Kode Produk</th>
+        <th>Nama Produk</th>
+        <th>Qty</th>
         <th width=\"10%\">DP</th>
         <th width=\"7%\">BV</th>
-        <th width=\"10%\">TOTAL DP </th>
-        <th width=\"7%\">TOTAL BV </th>
+        <th width=\"10%\">Total DP </th>
+        <th width=\"7%\">Total BV </th>
       </tr>
       <tr>";
 $i = 0;
@@ -67,10 +67,10 @@ foreach($detail as $bar)
         <td align=center>$bar->prdcd</td>
         <td>$bar->prdnm</td>
         <td align=\"right\">$bar->qty</td>
-        <td align=\"right\">".number_format($bar->dpr,0,",",",")."</td>
-        <td align=\"right\">".number_format($bar->bvr,0,",",",")."</td>
-        <td align=\"right\">".number_format($totDPR,0,",",",")."</td>
-        <td align=\"right\">".number_format($totBVR,0,",",",")."</td>";
+        <td align=\"right\">".number_format($bar->dpr,0,",",".")."</td>
+        <td align=\"right\">".number_format($bar->bvr,0,",",".")."</td>
+        <td align=\"right\">".number_format($totDPR,0,",",".")."</td>
+        <td align=\"right\">".number_format($totBVR,0,",",".")."</td>";
         /*<td><input type=\"checkbox\" name=\"check[]\" value=\"$bar->prdcd\"></td>*/
       echo "</tr>";
 	  $totalldp += ($bar->dpr * $bar->qty);
@@ -78,7 +78,7 @@ foreach($detail as $bar)
 }
 	echo "
       <tr>
-        <td colspan=\"6\"  align=\"center\">TOTAL</td>
+        <td colspan=\"6\"  align=\"center\"><b>TOTAL</b></td>
         <td align=\"right\">".number_format($totalldp,0,",",",")."</td>
         <td align=\"right\">$totallbv</td>
         
@@ -86,8 +86,8 @@ foreach($detail as $bar)
       <tr>
         <td  colspan=\"8\" align=\"center\" valign=\"center\">Security Code
         <input type=\"text\" name=\"secno\">&nbsp;
-        <input type=\"button\" class=\"btn btn-mini btn-warning\" name=\"back\" value=\"<< Back\" onclick=\"All.back_to_form(' .nextForm1',' .mainForm')\" />
-        <input type=\"submit\" class=\"btn btn-mini btn-primary\" name=\"updates\" value=\"Process\" />
+        <input type=\"button\" class=\"btn btn-mini btn-warning\" name=\"back\" value=\"<< Kembali\" onclick=\"All.back_to_form(' .nextForm1',' .mainForm')\" />
+        <input type=\"submit\" class=\"btn btn-mini btn-primary\" name=\"updates\" value=\"Proses Pengambilan Barang\" />
         <input type=\"hidden\" name=\"orderno\" value=\"".$main[0]->orderno."\"/> 
         </td>
       </tr>

@@ -4,40 +4,53 @@
       <div class="control-group">
       	<label class="control-label" for="typeahead">Periode Bonus</label>     
       	<div class="controls">
-      		<select tabindex="1" class="span4" id="bnsperiod"  name="bnsperiod" class="span8 typeahead">
+      		
 				<?php
-				$opts = 2;
-
+				//$opts = 2;
+                //print_r($curr_period);
 				////Array of months
-				$m = array("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec");
+				$m = array("Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agus", "Sept", "Oct", "Nov", "Des");
+				$m1 = array("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12");
 
 				////Get starting year and month
-				$sm = date('n', strtotime("-1 Months"));
-				$sy = date('Y', strtotime("-1 Months"));
-				foreach ($curr_period as $dt) {
-					$lastmonth = date('n', strtotime($dt -> lastperiod));
-					$lastyear = date('Y', strtotime($dt -> lastperiod));
-					$nextmonth = date('n', strtotime($dt -> nextperiod));
-					$nextyear = date('Y', strtotime($dt -> nextperiod));
-					for ($i = 0; $i < $opts; $i++) {
-						$test = $sm - 1;
-						////Check for current month and year so we can select it
-						if ($lastmonth == $sm) {
-							echo "<option value='" . $lastmonth . "/" . $lastyear . "' selected='selected'>" . $m[$lastmonth - 1] . " " . $lastyear . "</option>\n";
-						} else {
-							echo "<option value='" . $nextmonth . "/" . $nextyear . "' >" . $m[$nextmonth - 1] . " " . $nextyear . "</option>\n";
-						}
-						//// Fix counts when we span years
-						if ($sm == 12) {
-							$sm = 1;
-							$sy++;
-						} else {
-							$sm++;
+				if($sc_dfno == "BID06") {
+					echo "<input type=\"text\" tabindex\"1\" class=\"span4\" id=\"bnsperiod\"  name=\"bnsperiod\" class=\"span8 typeahead\" />";
+					
+					//echo "</select>";
+				} else {
+					echo "<select tabindex\"1\" class=\"span4\" id=\"bnsperiod\"  name=\"bnsperiod\" class=\"span8 typeahead\">";
+					$opts = 2;
+					$sm = date('n', strtotime("-1 Months"));
+				    $sy = date('Y', strtotime("-1 Months"));
+					
+					foreach ($curr_period as $dt) {
+						$lastmonth = date('n', strtotime($dt -> lastperiod));
+						$lastyear = date('Y', strtotime($dt -> lastperiod));
+						$nextmonth = date('n', strtotime($dt -> nextperiod));
+						$nextyear = date('Y', strtotime($dt -> nextperiod));
+						for ($i = 0; $i < $opts; $i++) {
+							$test = $sm - 1;
+							////Check for current month and year so we can select it
+							if ($lastmonth == $sm) {
+								echo "<option value='" . $lastmonth . "/" . $lastyear . "' selected='selected'>" . $m[$lastmonth - 1] . " " . $lastyear . "</option>\n";
+							} else {
+								echo "<option value='" . $nextmonth . "/" . $nextyear . "' >" . $m[$nextmonth - 1] . " " . $nextyear . "</option>\n";
+							}
+							//// Fix counts when we span years
+							if ($sm == 12) {
+								$sm = 1;
+								$sy++;
+							} else {
+								$sm++;
+							}
 						}
 					}
+					echo "</select>";
 				}
+				
+				
 				?>
-			</select>
+			
       	</div>
       	<label class="control-label" for="typeahead">Tipe Transaksi</label> 
       	<div class="controls">

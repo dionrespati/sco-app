@@ -194,26 +194,33 @@ class Sales_stockist extends MY_Controller {
 	//$route['sales/vc/check/(:any)/(:any)/(:any)'] = 'transaction/sales_stockist/checkValidVoucherCash/$1/$2/$3';
 	function checkValidVoucherCash($distributorcode,$vchnoo, $paytype)
     {
-        $response = jsonFalseResponse("No Voucher salah..");	
+        $response = jsonFalseResponse("No Voucher salah atau tidak sesuai dengan Member ".$distributorcode);	
         if($this->username != null) {	
 	        $this->load->model('transaction/Sales_stockist_model', 'm_sales_stk');
+			$arr = null;
 			if($paytype == "10") {
-				$arr = $this->m_sales_stk->checkValidCashVoucher($distributorcode,$vchnoo, "P");	
+				$arr = $this->m_sales_stk->checkValidCashVoucher($distributorcode,$vchnoo, "P");				
 			} else {
 				$arr = $this->m_sales_stk->checkValidCashVoucher($distributorcode,$vchnoo,"C");
 			}
-	        
-			if($arr != null) {
-				if($arr[0]->claimstatus == "1") {
-					$response = jsonFalseResponse("Voucher Cash sudah pernah di klaim..");	
-				} /*else if($arr[0]->vchtype != 'C') {
+	        //print_r($arr);
+			
+			$arrData = $arr['arrayData'];
+			if($arrData != null) {
+				if($arrData[0]->claimstatus == "1") {
+				    $arrx = array("response" => "false", "arrayData" => $arrData,"message" => "Voucher Cash sudah pernah di klaim pada ".$arrData[0]->claim_date.", Stokist : ".$arrData[0]->loccd);
+					$response = $arrx;
+				} 
+				/*else if($arr[0]->vchtype != 'C') {
 					$response = jsonFalseResponse("Voucher $vchnoo bukan voucher cash..");
-				} */else if($arr[0]->status_expire == '1') {
-					$response = jsonFalseResponse("Voucher sudah expire pada tanggal : ".$arr[0]->ExpireDate."");
+				} */
+				
+				else if($arrData[0]->status_expire == '1') {
+					$response = jsonFalseResponse("Voucher sudah expire pada tanggal : ".$arrData[0]->ExpireDate."");
 				} else {
-					$response = jsonTrueResponse($arr);	
+					$arrx = array("response" => "true", "arrayData" => $arrData, "detProd" => $arr['detProd']);
+					$response = $arrx;	
 				}
-					
 			}
 	        
 			echo json_encode($response);

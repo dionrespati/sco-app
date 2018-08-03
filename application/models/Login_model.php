@@ -7,6 +7,7 @@ class Login_model extends MY_Model {
     }
 	
 	function getValidateLogin($formData) {
+		
 		$qry = "SELECT a.username, a.[password], a.groupid, a.branchid, 
 				    b.groupname, c.loccd, c.sctype, 
 				    c.pricecode, c.pricecodePvr , c.fullnm, d.kode_gudang
@@ -28,7 +29,7 @@ class Login_model extends MY_Model {
 	
 	
 	function fetchingMenu($usertype) {
-		
+		$dbx = $this->load->database("db_sco", TRUE);
 			$qry = "SELECT 
 					  db_sco.dbo.ecomm_userauthority.menuid as menu_id,
 					  db_sco.dbo.app_tabprg.app_menu_parent_id as parent_id,
@@ -44,23 +45,23 @@ class Login_model extends MY_Model {
 					  db_sco.dbo.app_tabprg.app_menu_parent_id, 
 					  db_sco.dbo.app_tabprg.menu_order";
         //echo $qry;   
-        $query = mssql_query($qry);
-        $menu = array('items' => array(), 'parents' => array());
+        $query = $dbx->query($qry);
+		$menu = array('items' => array(), 'parents' => array());
 
-        
-     // Builds the array lists with data from the menu table
-        while ($items = mssql_fetch_assoc($query))
-        {
-            // Creates entry into items array with current menu item id ie. $menu['items'][1]
-            $menu['items'][$items['menu_id']] = $items;
-            // Creates entry into parents array. Parents array contains a list of all items with children
-            $menu['parents'][$items['parent_id']][] = $items['menu_id'];
-        }
-        return $menu;
+
+		// Builds the array lists with data from the menu table
+		foreach($query->result_array() as $row)
+		{
+		// Creates entry into items array with current menu item id ie. $menu['items'][1]
+		$menu['items'][$row['menu_id']] = $row;
+		// Creates entry into parents array. Parents array contains a list of all items with children
+		$menu['parents'][$row['parent_id']][] = $row['menu_id'];
+		}
+	return $menu;
 	}
 	
 	function fetchingMenu2($usertype) {
-		
+		$dbx = $this->load->database("db_sco", TRUE);
 			$qry = "SELECT 
 					  dbo.ecomm_userauthority.menuid as menu_id,
 					  dbo.app_tabprg.app_menu_parent_id as parent_id,
@@ -77,23 +78,23 @@ class Login_model extends MY_Model {
 					  (dbo.ecomm_userauthority.groupid = '$usertype')
 					ORDER BY dbo.app_tabprg.app_menu_parent_id, dbo.app_tabprg.menu_order";
         //echo $qry;   
-        $query = mssql_query($qry);
-        $menu = array('items' => array(), 'parents' => array());
+        $query = $dbx->query($qry);
+	    $menu = array('items' => array(), 'parents' => array());
 
         
-     // Builds the array lists with data from the menu table
-        while ($items = mssql_fetch_assoc($query))
-        {
-            // Creates entry into items array with current menu item id ie. $menu['items'][1]
-            $menu['items'][$items['menu_id']] = $items;
-            // Creates entry into parents array. Parents array contains a list of all items with children
-            $menu['parents'][$items['parent_id']][] = $items['menu_id'];
-        }
+		foreach($query->result_array() as $row)
+		{
+		// Creates entry into items array with current menu item id ie. $menu['items'][1]
+		$menu['items'][$row['menu_id']] = $row;
+		// Creates entry into parents array. Parents array contains a list of all items with children
+		$menu['parents'][$row['parent_id']][] = $row['menu_id'];
+		}
+	
         return $menu;
 	}
 	
 	function fetchingAllMenu() {
-		
+		$dbx = $this->load->database("db_sco", TRUE);		
 			$qry = "SELECT 
 					  db_sco.dbo.app_tabprg.app_menu_id as menu_id,
 					  db_sco.dbo.app_tabprg.app_menu_parent_id as parent_id,
@@ -103,18 +104,18 @@ class Login_model extends MY_Model {
 					 db_sco.dbo.app_tabprg 
 					ORDER BY db_sco.dbo.app_tabprg.app_menu_parent_id, db_sco.dbo.app_tabprg.menu_order";
         //echo $qry;   
-        $query = mssql_query($qry);
-        $menu = array('items' => array(), 'parents' => array());
+        $query = $dbx->query($qry);
+	    $menu = array('items' => array(), 'parents' => array());
 
         
      // Builds the array lists with data from the menu table
-        while ($items = mssql_fetch_assoc($query))
-        {
-            // Creates entry into items array with current menu item id ie. $menu['items'][1]
-            $menu['items'][$items['menu_id']] = $items;
-            // Creates entry into parents array. Parents array contains a list of all items with children
-            $menu['parents'][$items['parent_id']][] = $items['menu_id'];
-        }
+        foreach($query->result_array() as $row)
+		{
+		// Creates entry into items array with current menu item id ie. $menu['items'][1]
+		$menu['items'][$row['menu_id']] = $row;
+		// Creates entry into parents array. Parents array contains a list of all items with children
+		$menu['parents'][$row['parent_id']][] = $row['menu_id'];
+		}
         return $menu;
 	}
 	
