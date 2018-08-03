@@ -2,7 +2,7 @@ var $ = jQuery;
 
 var All = {
 	get_base : function() {
-       var url = "http://www.k-linkmember.co.id/sco.app/";
+       var url = config.url;
        return url;  
     },
     
