@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 var config = {
-    url : "http://localhost/sco.app/"
+    url: "http://localhost/sco.app/"
 }
 
 
