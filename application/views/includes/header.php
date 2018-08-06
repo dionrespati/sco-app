@@ -118,6 +118,7 @@
     <script src="<?php echo base_url('assets/css/bootstrap/js/DT_bootstrap.js')?>"></script>   
     
     <!-- LOAD MODULE FOR KSYSTEM APPLICATION -->
+    <script src="<?php echo base_url('assets/js_module/config.js')?>" ></script>
     <script src="<?php echo base_url('assets/js_module/global.js')?>" ></script>
 	<script src="<?php echo base_url('assets/js_module/userconfig.js')?>" ></script>
 	<script src="<?php echo base_url('assets/js_module/stockist.js')?>" ></script>
