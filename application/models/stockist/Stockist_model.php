@@ -16,7 +16,7 @@ class Stockist_model extends MY_Model {
 				   a.limitkit, a.arkit,
 				   a.limitkit - a.arkit as sisa_kuota,
 				   a.sfno as uplinestk, b.fullnm as uplinenm,
-				   a.lastkitno
+				   a.lastkitno, a.latitude, a.longitude
 				FROM mssc a 
 				INNER JOIN mssc b ON (a.sfno = b.loccd)
 				INNER JOIN [state] c ON (a.[state] = c.st_id)
@@ -37,7 +37,9 @@ class Stockist_model extends MY_Model {
 			        addr3 = '$data[addr3]',
 			        tel_hp = '$data[tel_hp]',
 			        tel_hm = '$data[tel_hm]',
-			        tel_of = '$data[tel_of]'
+			        tel_of = '$data[tel_of]',
+                                latitude = '$data[latitude]',
+                                longitude = '$data[longitude]'
 				WHERE loccd = '$data[loccd]'";
         $res = $this->executeQuery($qry, $this->setDB(2));
         if ($res > 0) {

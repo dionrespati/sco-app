@@ -4,7 +4,10 @@
  * and open the template in the editor.
  */
 var config = {
-    url: "http://localhost/sco.app/"
+    url: "http://localhost/sco.app/",
+    url_loader_gif: function() {
+        return this.url + "/assets/images/ajax-loader.gif";
+    }
 }
 
 

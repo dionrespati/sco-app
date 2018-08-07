@@ -19,6 +19,8 @@ var Stockist = {
                             $(All.get_active_tab() + " #tel_of").val(data.arrayData[0].tel_of);
                             $(All.get_active_tab() + " #tel_hm").val(data.arrayData[0].tel_hm);
                             $(All.get_active_tab() + " #lastkitno").val(data.arrayData[0].lastkitno);
+                            $(All.get_active_tab() + " #latitude").val(data.arrayData[0].latitude);
+                            $(All.get_active_tab() + " #longitude").val(data.arrayData[0].longitude);
                             $(All.get_active_tab() + " #arkit").val(data.arrayData[0].arkit);
                             $(All.get_active_tab() + " #limitkit").val(data.arrayData[0].limitkit);
                             $(All.get_active_tab() + " #sisa_kuota").val(data.arrayData[0].sisa_kuota);
