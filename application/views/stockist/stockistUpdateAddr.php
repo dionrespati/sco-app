@@ -25,6 +25,14 @@
       	<div class="controls">
       		<input value="<?php echo $result[0]->addr3 ?>"  type="text" class="TabOnEnter span6" id="addr3" name="addr3" />	
       	</div>
+         <label class="control-label" for="typeahead">Latitude</label>
+      	<div class="controls">
+      		<input value="<?php echo $result[0]->latitude ?>"  type="text" class="TabOnEnter span6" id="latitude" name="latitude" />	
+      	</div>
+        <label class="control-label" for="typeahead">Longitude</label>
+      	<div class="controls">
+      		<input value="<?php echo $result[0]->longitude ?>"  type="text" class="TabOnEnter span6" id="longitude" name="longitude" />	
+      	</div>
       	<label class="control-label" for="typeahead">No HP</label>
       	<div class="controls">
       		<input value="<?php echo $result[0]->tel_hp ?>"  type="text" class="TabOnEnter span6" id="tel_hp" name="tel_hp" />	
@@ -52,6 +60,7 @@
       	<div class="controls">
       		<input value="<?php echo $result[0]->sisa_kuota ?>"  type="text" readonly="readonly" class="TabOnEnter span6" id="sisa_kuota" name="sisa_kuota" />	
       	</div>
+       
       	<?php
 		} else {
 		?>
@@ -66,7 +75,7 @@
       	<label class="control-label" for="typeahead">Sisa Kuota Input</label>
       	<div class="controls">
       		<input value="<?php echo $result[0]->sisa_kuota ?>"  type="text" readonly="readonly" class="TabOnEnter span6" id="sisa_kuota" name="sisa_kuota" />	
-      	</div>
+      	
 		<?php		
 		}
       	?>

@@ -19,12 +19,12 @@ var All = {
 
     get_image_load: function (set_to) {
         set_to = set_to || ".mainForm .result";
-        $(All.get_box_content() + set_to).html("<center><img src=" + All.get_base() + "/assets/images/ajax-loader.gif ></center>");
+        $(All.get_box_content() + set_to).html("<center><img src=" + config.url_loader_gif() + "></center>");
     },
 
     get_image_load2: function () {
         //set_to = set_to || ".mainForm > .result";
-        $(All.get_active_tab() + ".result").html("<center><img src=" + All.get_base() + "/assets/images/ajax-loader.gif ></center>");
+        $(All.get_active_tab() + ".result").html("<center><img src=" + config.url_loader_gif() + "></center>");
     },
 
     set_wait_message: function () {
@@ -49,7 +49,7 @@ var All = {
     get_wait_message: function () {
         $(All.get_active_tab() + ".wait_msg").css('display', 'block');
         //All.get_image_load(All.get_active_tab() + " .img_load");
-        $(All.get_active_tab() + ".img_load").html("<center><img src=" + All.get_base() + "/assets/images/ajax-loader.gif ></center>");
+        $(All.get_active_tab() + ".img_load").html("<center><img src=" + config.url_loader_gif() + "></center>");
     },
 
     clear_wait_message: function () {
