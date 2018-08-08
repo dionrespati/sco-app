@@ -13,14 +13,14 @@ class Product extends MY_Controller {
 
     //$route['product/search'] = 'product/product/productSearch';
     public function productSearch() {
+        $data['form_header'] = "Product Search";
+        $data['form_action'] = base_url('product/search/list');
+        $data['icon'] = "icon-search";
+        $data['form_reload'] = 'product/search';
         if ($this->username != null) {
-            $data['form_header'] = "Product Search";
-            $data['form_action'] = base_url('product/search/list');
-            $data['icon'] = "icon-search";
-            $data['form_reload'] = 'product/search';
             $this->setTemplate($this->folderView . 'productSearch', $data);
         } else {
-            echo sessionExpireMessage(false);
+            $this->setTemplate('includes/inline_login', $data);
         }
     }
 
