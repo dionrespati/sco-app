@@ -68,11 +68,12 @@ class Member_registration_model extends MY_Model {
     function getListStockistByState($state) {
         $qry = "SELECT loccd, fullnm 
                 FROM mssc 
-                WHERE state = '$state' and sctype != '3' 
+                WHERE state = '$state' and sctype = '1' 
                     AND fullnm not in('TERMINATION','CANCEL','BUSSINESS & DEVELOPMENT','INTERNET ID','CENCEL', 
                        'UNITED STATES OF AME', 'THAILAND', 'SWITZERLAND', 'SPANYOL', 'SRILANKA', 'SINGAPORE', 'JAPAN',
-		       'CANADA','INTERNET CODE','UNITED ARAB EMIRATES') 
-                    AND scstatus='1' 
+		       'CANADA','INTERNET CODE','UNITED ARAB EMIRATES', 'BLOKIR KANTOR PUSAT') 
+                    AND scstatus='1'
+                    AND loccd NOT IN ('ANP', 'JNE', 'MKT', 'PR', 'WR', 'IDJD01')
 		        ORDER BY sctype, fullnm ";
         //echo $qry;
         $result = $this->getRecordset($qry, null, $this->db2);
