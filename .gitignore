@@ -1,7 +1,4 @@
-/application/config/database.php
-/application/config/config.php
 /application/session
-/system
 composer.json
 contributing.md
 f684b96f5074d4177f88c49b0f70666f813ab4e7
@@ -11,5 +8,4 @@ Moustach.zip
 readme.rst
 unzip.php
 .project
-.htaccess
 /nbproject

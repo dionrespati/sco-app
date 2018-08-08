@@ -38,6 +38,10 @@
             <td>&nbsp;</td>
             <td><?php echo $result[0]->addr3; ?></td>
        </tr>
+       <tr>      
+            <td>Lat / Long Location</td>
+            <td><?php echo $result[0]->latitude.", ".$result[0]->longitude; ?></td>
+       </tr>
         <tr>      
             <td>State/Area</td>
             <td><?php echo $result[0]->statenm." (".$result[0]->state.")"; ?></td>
