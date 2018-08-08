@@ -41,10 +41,11 @@ class Member_report_model extends MY_Model {
     }
 
     function getListMemberByParam($searchBy, $paramValue) {
-        $where = "where a.$searchBy like '%$paramValue%'";
-        $slc = "select a.dfno,a.fullnm,a.idno,a.addr1,a.tel_hp, a.password,a.novac,
-		               a.loccd
-					from msmemb a $where";
+        $where = "WHERE a.$searchBy like '%$paramValue%'";
+        $slc = "SELECT a.dfno,a.fullnm,a.idno,
+                    a.addr1,a.tel_hp, a.password,
+                    a.novac, a.loccd
+		FROM msmemb a $where";
         $result = $this->getRecordset($slc, null, $this->db2);
         return $result;
     }
@@ -58,9 +59,10 @@ class Member_report_model extends MY_Model {
           } */
 
         $where = "where a.loccd = '" . $sc_dfno . "' AND CONVERT(VARCHAR(10), a.jointdt,20) BETWEEN '$from' AND '$to'";
-        $slc = "select a.dfno,a.fullnm,a.idno,a.addr1,a.tel_hp, a.password,a.novac,
-		            a.loccd
-					from msmemb a $where";
+        $slc = "SELECT a.dfno,a.fullnm,a.idno,
+                       a.addr1,a.tel_hp, a.password,
+                       a.novac, a.loccd
+		FROM msmemb a $where";
         //echo $slc;
         $result = $this->getRecordset($slc, null, $this->db2);
         return $result;
@@ -76,15 +78,14 @@ class Member_report_model extends MY_Model {
           AND a.batchno = '$mmno'"; */
 
         $qry = "SELECT CONVERT(VARCHAR(30), b.etdt, 103) AS etdt, a.invoiceno, a.registerno,
-				       a.receiptno, a.batchscno, b.dfno, c.fullnm, CONVERT(VARCHAR(30), c.jointdt, 103) AS jointdt, c.sponsorid, c.sponsorregid,
-				       CONVERT(VARCHAR(10), b.batchdt, 20) as batchdt
-				FROM ordivtrh a
-				     LEFT OUTER JOIN sc_newtrh b ON (a.batchscno = b.batchno)
-				     INNER JOIN msmemb c ON (b.dfno = c.dfno)
-				WHERE b.ttptype LIKE 'MEMB%' AND 
-				a.invoiceno = '$mmno'
-				AND a.batchscno != '' AND a.batchscno is not null 
-				ORDER BY b.etdt";
+                    a.receiptno, a.batchscno, b.dfno, c.fullnm, CONVERT(VARCHAR(30), c.jointdt, 103) AS jointdt, c.sponsorid, c.sponsorregid,
+                    CONVERT(VARCHAR(10), b.batchdt, 20) as batchdt
+                FROM ordivtrh a
+                    LEFT OUTER JOIN sc_newtrh b ON (a.batchscno = b.batchno)
+                    INNER JOIN msmemb c ON (b.dfno = c.dfno)
+                WHERE b.ttptype LIKE 'MEMB%' AND 
+                    a.invoiceno = '$mmno' AND a.batchscno != '' AND a.batchscno is not null 
+                ORDER BY b.etdt";
         //echo $qry;
         $result = $this->getRecordset($qry, null, $this->db2);
         return $result;

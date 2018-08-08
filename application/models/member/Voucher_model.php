@@ -26,12 +26,12 @@ class Voucher_model extends MY_Model {
         }
         $qry = "SELECT a.category, a.ordtype, a.invoiceno, a.invoicedt, a.dfno, c.fullnm,
 					   b.trcd, b.createdt, b.applyto
-				FROM klink_mlm2010.dbo.ordivtrh a
-					 INNER JOIN klink_mlm2010.dbo.billivhdr b on a.receiptno=b.trcd
-				     INNER JOIN klink_mlm2010.dbo.mssc c ON a.dfno=c.loccd
-				     $join
-				WHERE a.ordtype = '5' AND $param
-				ORDER BY a.invoiceno";
+                FROM klink_mlm2010.dbo.ordivtrh a
+                         INNER JOIN klink_mlm2010.dbo.billivhdr b on a.receiptno=b.trcd
+                     INNER JOIN klink_mlm2010.dbo.mssc c ON a.dfno=c.loccd
+                     $join
+                WHERE a.ordtype = '5' AND $param
+                ORDER BY a.invoiceno";
         //echo $qry;				
         $result = $this->getRecordset($qry, null, $this->db1);
         //var_dump($result);
@@ -40,29 +40,27 @@ class Voucher_model extends MY_Model {
 
     function getListProductForSK($orderno) {
         $qry = "SELECT b.invoiceno, b.prdcd, c.prdnm, c.kit,
-					b.pricecode, b.dp, b.bv, b.qtyord,
-				    COUNT(d.formno) as jml_active,
-				    b.qtyord - COUNT(d.formno) as sisa_qty 
-				FROM klink_mlm2010.dbo.ordivtrd b
-				LEFT OUTER JOIN klink_mlm2010.dbo.msprd c ON (b.prdcd = c.prdcd)
-				LEFT OUTER JOIN klink_mlm2010.dbo.starterkit d ON (b.invoiceno = d.sold_trcd) AND d.prdcd = b.prdcd
-				WHERE b.invoiceno = '$orderno' AND c.kit = '1'
-				GROUP BY b.invoiceno, b.prdcd, c.prdnm, 
-					b.pricecode, b.dp, b.bv, b.qtyord, c.kit
-				";
+                        b.pricecode, b.dp, b.bv, b.qtyord,
+                    COUNT(d.formno) as jml_active,
+                    b.qtyord - COUNT(d.formno) as sisa_qty 
+                FROM klink_mlm2010.dbo.ordivtrd b
+                LEFT OUTER JOIN klink_mlm2010.dbo.msprd c ON (b.prdcd = c.prdcd)
+                LEFT OUTER JOIN klink_mlm2010.dbo.starterkit d ON (b.invoiceno = d.sold_trcd) AND d.prdcd = b.prdcd
+                WHERE b.invoiceno = '$orderno' AND c.kit = '1'
+                GROUP BY b.invoiceno, b.prdcd, c.prdnm, 
+                        b.pricecode, b.dp, b.bv, b.qtyord, c.kit";
         $result = $this->getRecordset($qry, null, $this->db1);
         if ($result == null) {
             $qry = "SELECT b.invoiceno, b.prdcd, c.prdnm, c.kit,
-					b.pricecode, b.dp, b.bv, b.qtyord,
-				    COUNT(d.formno) as jml_active,
-				    b.qtyord - COUNT(d.formno) as sisa_qty 
-				FROM klink_mlm2010.dbo.ordtrd b
-				LEFT OUTER JOIN klink_mlm2010.dbo.msprd c ON (b.prdcd = c.prdcd)
-				LEFT OUTER JOIN klink_mlm2010.dbo.starterkit d ON (b.invoiceno = d.sold_trcd) AND d.prdcd = b.prdcd
-				WHERE b.invoiceno = '$orderno' AND c.kit = '1'
-				GROUP BY b.invoiceno, b.prdcd, c.prdnm, 
-					b.pricecode, b.dp, b.bv, b.qtyord, c.kit
-				";
+                            b.pricecode, b.dp, b.bv, b.qtyord,
+                        COUNT(d.formno) as jml_active,
+                        b.qtyord - COUNT(d.formno) as sisa_qty 
+                    FROM klink_mlm2010.dbo.ordtrd b
+                    LEFT OUTER JOIN klink_mlm2010.dbo.msprd c ON (b.prdcd = c.prdcd)
+                    LEFT OUTER JOIN klink_mlm2010.dbo.starterkit d ON (b.invoiceno = d.sold_trcd) AND d.prdcd = b.prdcd
+                    WHERE b.invoiceno = '$orderno' AND c.kit = '1'
+                    GROUP BY b.invoiceno, b.prdcd, c.prdnm, 
+                            b.pricecode, b.dp, b.bv, b.qtyord, c.kit";
             $result = $this->getRecordset($qry, null, $this->db1);
         }
         return $result;
@@ -76,11 +74,12 @@ class Voucher_model extends MY_Model {
          * 
          */
         $qry = "SELECT a.sold_trcd, a.formno, a.updatenm, a.updatedt, 
-		                a.activate_dfno, b.fullnm, a.status, CONVERT (VARCHAR(30),a.activate_dt,103) as activate_dt
-				FROM klink_mlm2010.dbo.starterkit a
-				     LEFT OUTER JOIN klink_mlm2010.dbo.msmemb b on a.activate_dfno=b.dfno
-				WHERE A.sold_trcd='$orderno' AND a.prdcd = '$prdcd'
-				ORDER BY a.formno";
+                    a.activate_dfno, b.fullnm, a.status, 
+                    CONVERT (VARCHAR(30),a.activate_dt,103) as activate_dt
+                FROM klink_mlm2010.dbo.starterkit a
+                     LEFT OUTER JOIN klink_mlm2010.dbo.msmemb b on a.activate_dfno=b.dfno
+                WHERE A.sold_trcd='$orderno' AND a.prdcd = '$prdcd'
+                ORDER BY a.formno";
         //echo $qry;				
         $result = $this->getRecordset($qry, null, $this->db1);
         //var_dump($result);
@@ -112,9 +111,9 @@ class Voucher_model extends MY_Model {
         $arrayKe--;
 
         $cekAvailableVoucher = "SELECT a.sold_trcd, a.formno, a.updatenm, CONVERT(VARCHAR(10), a.updatedt, 111) as updatedt, a.activate_dfno, b.fullnm, a.status
-                                  FROM klink_mlm2010.dbo.starterkit a 
-                                  LEFT OUTER JOIN klink_mlm2010.dbo.msmemb b on a.activate_dfno=b.dfno
-                                  WHERE a.formno IN ($value) AND a.status != '0'";
+                                FROM klink_mlm2010.dbo.starterkit a 
+                                LEFT OUTER JOIN klink_mlm2010.dbo.msmemb b on a.activate_dfno=b.dfno
+                                WHERE a.formno IN ($value) AND a.status != '0'";
         $result = $this->getRecordset($cekAvailableVoucher, null, $this->db1);
         if ($result != null) {
             $arr = array("response" => "false", "res" => $result);
@@ -135,7 +134,7 @@ class Voucher_model extends MY_Model {
 
         $updStarterkit = "UPDATE starterkit SET sold_trcd = '$form[trxno]', status='1', updatenm = '$this->username', 
     	                         updatedt='$tgl_skrg', PT_SVRID = 'ID', prdcd='$form[productcode]', sold_trcdnewera = '$form[trxno]' 
-    					  WHERE formno IN($value)";
+    			  WHERE formno IN($value)";
         $res = $this->executeQuery($updStarterkit, $this->db2);
         if ($res > 0) {
             $arr = jsonTrueResponse(null, "Voucher berhasil di release..");
@@ -146,25 +145,24 @@ class Voucher_model extends MY_Model {
     }
 
     function getDetailVoucher($formno) {
-        $cekVoucherNum = "SELECT
-		                      a.status, 
-					          a.vchkey,
-					          a.formno,
-					          a.activate_by,
-					          a.prdcd,
-					          c.prdnm,
-					          a.updatenm,
-					          a.activate_dfno,
-					          b.fullnm as nama_member_aktif,
-					          CONVERT(VARCHAR(30), a.updatedt, 103) AS tgl2,
-					          sold_trcd,
-					          sold_trcdnewera
-					      FROM
-					          starterkit a
-					          LEFT OUTER JOIN msmemb b ON (a.activate_dfno = b.dfno)
-							  LEFT OUTER JOIN msprd c ON (a.prdcd = c.prdcd)
-					      WHERE
-					          (a.formno = '$formno')";
+        $cekVoucherNum = "SELECT a.status, 
+                                a.vchkey,
+                                a.formno,
+                                a.activate_by,
+                                a.prdcd,
+                                c.prdnm,
+                                a.updatenm,
+                                a.activate_dfno,
+                                b.fullnm as nama_member_aktif,
+                                CONVERT(VARCHAR(30), a.updatedt, 103) AS tgl2,
+                                sold_trcd,
+                                sold_trcdnewera
+                        FROM
+                            starterkit a
+                            LEFT OUTER JOIN msmemb b ON (a.activate_dfno = b.dfno)
+                                    LEFT OUTER JOIN msprd c ON (a.prdcd = c.prdcd)
+                        WHERE
+                            (a.formno = '$formno')";
         $result = $this->getRecordset($cekVoucherNum, null, $this->db2);
         //var_dump($result);
         return $result;

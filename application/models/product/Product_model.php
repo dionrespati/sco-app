@@ -45,8 +45,9 @@ class Product_model extends MY_Model {
                         b.cp , 
                         b.bv,  
                         b.pricecode AS [pricecode]
-                 from msprd a
-                      inner join pricetab b on a.prdcd=b.prdcd and b.pricecode='$pricecode' AND scstatus='1' AND a.webstatus = '1' AND a.status = '1'
+                 FROM msprd a
+                 INNER JOIN pricetab b on (a.prdcd=b.prdcd and b.pricecode='$pricecode')
+                      AND scstatus='1' AND a.webstatus = '1' AND a.status = '1'
                       AND a.prdcd = '$id'";
         //echo $qry;
         $res = $this->getRecordset($qry, NULL, $this->db2);
@@ -54,8 +55,10 @@ class Product_model extends MY_Model {
     }
 
     function getProductByName($name) {
-        $name = strtoupper($name);
-        $qry = "SELECT * FROM V_Ecomm_PriceList_Dion a WHERE a.prdnm LIKE '%$name%' AND a.web_status = '1' AND a.status = '1'";
+        $nameCaps = strtoupper($name);
+        $qry = "SELECT * FROM V_Ecomm_PriceList_Dion a "
+                . "WHERE a.prdnm LIKE '%$nameCaps%' AND a.web_status = '1' "
+                . "AND a.status = '1'";
         //echo $qry;
         $res = $this->getRecordset($qry, NULL, $this->db3);
         return $res;
@@ -66,7 +69,10 @@ class Product_model extends MY_Model {
         if ($value != "") {
             $prdnm .= " AND a.prdnm LIKE '%$value%'";
         }
-        $qry = "SELECT * FROM V_Ecomm_PriceList_Dion a WHERE a.prdcd LIKE '%F' AND a.web_status = '1' AND a.status = '1' AND a.bv = 0 $prdnm";
+        $qry = "SELECT * FROM V_Ecomm_PriceList_Dion a "
+                . "WHERE a.prdcd LIKE '%F' "
+                . "AND a.web_status = '1' "
+                . "AND a.status = '1' AND a.bv = 0 $prdnm";
         //echo $qry;
         $res = $this->getRecordset($qry, NULL, $this->db3);
         return $res;
@@ -79,7 +85,7 @@ class Product_model extends MY_Model {
         }
 
         $qry = "SELECT * FROM V_Ecomm_PriceList_Dion a 
-				WHERE a.is_discontinue = '1' ";
+                WHERE a.is_discontinue = '1' ";
         $res = $this->getRecordset($qry, NULL, $this->db3);
         return $res;
     }
@@ -91,7 +97,7 @@ class Product_model extends MY_Model {
         }
 
         $qry = "SELECT * FROM V_Ecomm_PriceList_Dion a 
-				WHERE a.ecomm_status = '$stt'";
+		WHERE a.ecomm_status = '$stt'";
         $res = $this->getRecordset($qry, NULL, $this->db3);
         return $res;
     }

@@ -30,7 +30,6 @@ class Login extends MY_Controller {
 
     //$route['auth/inline'] = 'login/authInline';
     public function authInline() {
-
         try {
             $srvReturn = $this->s_login->getValidateLogin();
             echo json_encode(jsonTrueResponse(null, "Login success"));
