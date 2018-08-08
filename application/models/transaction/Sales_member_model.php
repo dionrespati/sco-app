@@ -50,27 +50,31 @@ class Sales_member_model extends MY_Model {
          * 
          */
         $qry = "SELECT  A.trcd, A.orderno, A.batchno, A.invoiceno, A.trtype, A.ttptype, 
-					    MAX(A.etdt) AS etdt,  MAX(A.createdt) AS createdt, 
-					    A.dfno, A.distnm, A.loccd, A.loccdnm, A.sc_co, A.sc_conm, A.sc_dfno, 
-					    A.sc_dfnonm, A.tdp, A.tbv, A.bnsperiod, A.statusTrx, a.distnm, a.remarks 
-	   			 FROM V_HILAL_CHECK_BV_ONLINE_HDR a
-	   			 WHERE $qryParam
-	   			 GROUP BY A.trcd, A.orderno, A.batchno, A.invoiceno, A.trtype, A.ttptype, 
-					    A.dfno, A.distnm, A.loccd, A.loccdnm, A.sc_co, A.sc_conm, A.sc_dfno, 
-					    A.sc_dfnonm, A.tdp, A.tbv, A.bnsperiod, A.statusTrx , a.distnm, a.remarks
-				ORDER BY MAX(A.etdt), A.trcd";
+                            MAX(A.etdt) AS etdt,  MAX(A.createdt) AS createdt, 
+                            A.dfno, A.distnm, A.loccd, A.loccdnm, A.sc_co, A.sc_conm, A.sc_dfno, 
+                            A.sc_dfnonm, A.tdp, A.tbv, A.bnsperiod, A.statusTrx, a.distnm, a.remarks 
+                FROM V_HILAL_CHECK_BV_ONLINE_HDR a
+                WHERE $qryParam
+                GROUP BY A.trcd, A.orderno, A.batchno, A.invoiceno, A.trtype, A.ttptype, 
+                           A.dfno, A.distnm, A.loccd, A.loccdnm, A.sc_co, A.sc_conm, A.sc_dfno, 
+                           A.sc_dfnonm, A.tdp, A.tbv, A.bnsperiod, A.statusTrx , a.distnm, a.remarks
+                ORDER BY MAX(A.etdt), A.trcd";
         //echo $qry;
         $res = $this->getRecordset($qry, null, $this->db2);
         return $res;
     }
 
     function getTrxByTrcdHead($param, $value) {
-        $qry = "SELECT  TOP 1 a.trcd, a.orderno, a.batchno, a.invoiceno, a.trtype, a.ttptype, 
-						a.etdt, a.batchdt, a.remarks, a.createdt, a.createnm, A.updatedt, A.updatenm, a.dfno, 
-						a.distnm, a.loccd, a.loccdnm, a.sc_co, a.sc_conm, a.sc_dfno, 
-						a.sc_dfnonm, a.tdp, a.tbv, a.bnsperiod, a.tglinput, a.statusTrx 
-	   			 FROM V_HILAL_CHECK_BV_ONLINE_HDR a
-	   			 WHERE $param = '$value'";
+        $qry = "SELECT  TOP 1 a.trcd, a.orderno, a.batchno, 
+                    a.invoiceno, a.trtype, a.ttptype, 
+                    a.etdt, a.batchdt, a.remarks, a.createdt, 
+                    a.createnm, A.updatedt, A.updatenm, a.dfno, 
+                    a.distnm, a.loccd, a.loccdnm, a.sc_co, 
+                    a.sc_conm, a.sc_dfno, 
+                    a.sc_dfnonm, a.tdp, a.tbv, 
+                    a.bnsperiod, a.tglinput, a.statusTrx 
+                FROM V_HILAL_CHECK_BV_ONLINE_HDR a
+                WHERE $param = '$value'";
         //echo $qry;
         //echo "<br />";
         $res = $this->getRecordset($qry, null, $this->db2);
@@ -79,8 +83,8 @@ class Sales_member_model extends MY_Model {
 
     function geTrxByTrcdDet($param, $value) {
         $qry = "SELECT  a.trcd, a.prdcd, a.prdnm, a.qtyord, a.bv, a.dp, a.TOTBV, a.TOTDP
-	   			 FROM V_HILAL_CHECK_BV_ONLINE_DET a
-	   			 WHERE $param = '$value'";
+                FROM V_HILAL_CHECK_BV_ONLINE_DET a
+                WHERE $param = '$value'";
         //echo $qry;
         //echo "<br />";
         $res = $this->getRecordset($qry, null, $this->db2);

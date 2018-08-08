@@ -149,9 +149,12 @@ class Sales_generate_model extends MY_Model {
                     a.bnsperiod,
                     b.fullnm
                 FROM sc_newtrh a 
-	               inner join klink_mlm2010.dbo.msmemb b on a.dfno = b.dfno 
-                WHERE a.sc_dfno = '" . $scdfno . "' AND a.sc_co = '" . $scco . "' 
-                AND a.createnm = '" . $this->stockist . "' AND a.bnsperiod = '" . $bnsperiod . "' AND a.batchno is null";
+	        INNER JOIN klink_mlm2010.dbo.msmemb b on (a.dfno = b.dfno)
+                WHERE a.sc_dfno = '" . $scdfno . "' "
+                . "AND a.sc_co = '" . $scco . "' "
+                . "AND a.createnm = '" . $this->stockist . "' "
+                . "AND a.bnsperiod = '" . $bnsperiod . "' "
+                . "AND a.batchno is null";
         //echo $slc;
         return $this->getRecordset($slc, null, $this->db1);
     }
