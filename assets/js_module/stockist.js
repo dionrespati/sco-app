@@ -312,6 +312,8 @@ var Stockist = {
                                 function (data) {
                                     All.set_enable_button();
                                     if (data.response == "true") {
+                                        var strGG = vchno.substring(0, 3);
+                                        
                                         pay = pay + payValue;
                                         var rowhtml = "<tr>";
                                         rowhtml += "<td align=center>" + paytypeTxt + "<input type=hidden name=payChooseType[] value=" + paytype + " /></td>";
