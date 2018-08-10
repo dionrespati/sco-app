@@ -335,7 +335,7 @@ var Stockist = {
                                         rowhtml += "<td align=center>" + paytypeTxt + "<input type=hidden name=payChooseType[] value=" + paytype + " /></td>";
                                         rowhtml += "<td align=center>" + data.arrayData[0].VoucherNo + "<input class='checkReff' type=hidden name=payReff[] value=" + data.arrayData[0].VoucherNo + " /></td>";
                                         rowhtml += "<td align=right>";
-                                        rowhtml += "<input class='forSum' readonly=readonly style='text-align:right; width:160px;' type=text name=payChooseValue[] value=" + All.num(parseInt(data.arrayData[0].VoucherAmt)) + " /></td>";
+                                        rowhtml += "<input class='forSum' readonly=readonly style='text-align:right; width:160px;' type=text name=payChooseValue[] value=" + All.num(parseFloat(data.arrayData[0].VoucherAmt)) + " /></td>";
                                         rowhtml += "<td align=center><a onclick=javascript:Stockist.delPayment(this) class='btn btn-mini btn-danger'><i class='icon-trash icon-white'></i></a></td>";
                                         rowhtml += "</tr>";
                                         $(All.get_active_tab() + " #payChoose").append(rowhtml);
