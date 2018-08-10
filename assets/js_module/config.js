@@ -6,7 +6,7 @@
 var config = {
     url: "http://localhost/sco.app/",
     url_loader_gif: function() {
-        return this.url + "/assets/images/ajax-loader.gif";
+        return this.url + "assets/images/ajax-loader.gif";
     }
 }
 
