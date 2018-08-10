@@ -8,7 +8,7 @@ class Sales_generate_model extends MY_Model {
     }
 
     function getGenerateByStk($x) {
-        //$x['FROM'],$x['to'],$x['idstkk'],$x['bnsperiod'],$x['searchs']
+        //$x['from'],$x['to'],$x['idstkk'],$x['bnsperiod'],$x['searchs']
         //$username = $this->session->userdata('stockist');
 
 
@@ -19,9 +19,9 @@ class Sales_generate_model extends MY_Model {
         }
 
         $trxdate = "";
-        if ($x['FROM'] != "" && $x['FROM'] != " " && $x['FROM'] != null) {
-            //echo "tgl : ".$x['FROM'];
-            $FROMs = date('Y/m/d', strtotime($x['FROM']));
+        if ($x['from'] != "" && $x['from'] != " " && $x['from'] != null) {
+            //echo "tgl : ".$x['from'];
+            $FROMs = date('Y/m/d', strtotime($x['from']));
             $tos = date('Y/m/d', strtotime($x['to']));
             $trxdate = " AND (CONVERT(VARCHAR(10), a.etdt, 111) between '" . $FROMs . "' AND '" . $tos . "')";
         }
@@ -43,11 +43,11 @@ class Sales_generate_model extends MY_Model {
                 ORDER BY a.trcd";
         //a.createnm = '".$x['mainstk']."' AND 
         //echo $slc;
-        return $this->getRecordset($slc, null, $this->db1);
+        return $this->getRecordset($slc, null, $this->db2);
     }
 
     function getGenerateByPVR($x) {
-        //$FROMs = date('Y/m/d', strtotime($x['FROM']));
+        //$FROMs = date('Y/m/d', strtotime($x['from']));
         //$tos = date('Y/m/d', strtotime($x['to']));
 
         $folderGets = explode('/', $x['bnsperiod']);
@@ -56,9 +56,9 @@ class Sales_generate_model extends MY_Model {
         $bonusperiod = $data['month'] . "/" . "1" . "/" . $data['year'];
 
         $trxdate = "";
-        if ($x['FROM'] != "" && $x['FROM'] != " " && $x['FROM'] != null) {
-            //echo "tgl : ".$x['FROM'];
-            $FROMs = date('Y/m/d', strtotime($x['FROM']));
+        if ($x['from'] != "" && $x['from'] != " " && $x['from'] != null) {
+            //echo "tgl : ".$x['from'];
+            $FROMs = date('Y/m/d', strtotime($x['from']));
             $tos = date('Y/m/d', strtotime($x['to']));
             $trxdate = " AND (CONVERT(VARCHAR(10), a.etdt, 111) between '" . $FROMs . "' AND '" . $tos . "')";
         }
@@ -82,9 +82,9 @@ class Sales_generate_model extends MY_Model {
     }
 
     function getGenerateBySUbMs($x) {
-        //$x['FROM'],$x['to'],$x['idstkk'],$x['bnsperiod'],$x['searchs']
+        //$x['from'],$x['to'],$x['idstkk'],$x['bnsperiod'],$x['searchs']
         //$username = $this->session->userdata('stockist');
-        //$FROMs = date('Y/m/d', strtotime($x['FROM']));
+        //$FROMs = date('Y/m/d', strtotime($x['from']));
         //$tos = date('Y/m/d', strtotime($x['to']));
         if ($x['idstkk'] == "") {
             if ($x['searchs'] == "sub") {
@@ -103,9 +103,9 @@ class Sales_generate_model extends MY_Model {
         }
 
         $trxdate = "";
-        if ($x['FROM'] != "" && $x['FROM'] != " " && $x['FROM'] != null) {
-            //echo "tgl : ".$x['FROM'];
-            $FROMs = date('Y/m/d', strtotime($x['FROM']));
+        if ($x['from'] != "" && $x['from'] != " " && $x['from'] != null) {
+            //echo "tgl : ".$x['from'];
+            $FROMs = date('Y/m/d', strtotime($x['from']));
             $tos = date('Y/m/d', strtotime($x['to']));
             $trxdate = " AND (CONVERT(VARCHAR(10), a.etdt, 111) between '" . $FROMs . "' AND '" . $tos . "')";
         }
