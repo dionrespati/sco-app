@@ -19,8 +19,6 @@ var Stockist = {
                             $(All.get_active_tab() + " #tel_of").val(data.arrayData[0].tel_of);
                             $(All.get_active_tab() + " #tel_hm").val(data.arrayData[0].tel_hm);
                             $(All.get_active_tab() + " #lastkitno").val(data.arrayData[0].lastkitno);
-                            $(All.get_active_tab() + " #latitude").val(data.arrayData[0].latitude);
-                            $(All.get_active_tab() + " #longitude").val(data.arrayData[0].longitude);
                             $(All.get_active_tab() + " #arkit").val(data.arrayData[0].arkit);
                             $(All.get_active_tab() + " #limitkit").val(data.arrayData[0].limitkit);
                             $(All.get_active_tab() + " #sisa_kuota").val(data.arrayData[0].sisa_kuota);
@@ -312,8 +310,26 @@ var Stockist = {
                                 function (data) {
                                     All.set_enable_button();
                                     if (data.response == "true") {
-                                        var strGG = vchno.substring(0, 3);
-                                        
+                                        //Tambah data produk bila tipe voucher adalah XPP / XPV / ZVO
+                                        var detProd = data.detProd;
+                                        if (detProd != null) {
+                                            $(All.get_active_tab() + " #addPrd").html(null);
+                                            var rowPrd = "";
+                                            $.each(detProd, function (key, value) {
+                                                rowPrd += "<tr>";
+                                                rowPrd += "<td><input readonly=readonly  type='text' class='span12 typeahead' name=prdcd[] value='" + value.prdcd + "'/></td>";
+                                                rowPrd += "<td><input readonly=readonly type='text' class='span12 typeahead' name=prdnm[] value='" + value.prdnm + "'/></td>";
+                                                rowPrd += "<td><input readonly=readonly style='text-align:right;' type='text' class='span12 typeahead jumlah' name=jum[] value='" + value.qtyord + "' /></td>";
+                                                rowPrd += "<td><input readonly=readonly style='text-align:right' type='text' class='span12 typeahead jumlah' name=poin[] value='" + All.num(value.bv) + "' /></td>";
+                                                rowPrd += "<td><input readonly=readonly style='text-align:right' type='text' class='span12 typeahead jumlah' name=harga[] value='" + All.num(value.dp) + "' /></td>";
+                                                rowPrd += "<td><input readonly=readonly style='text-align:right' type='text' class='span12 typeahead'  name=sub_tot_bv[] value='" + All.num(parseInt(value.qtyord * value.bv)) + "' /></td>";
+                                                rowPrd += "<td><input readonly=readonly style='text-align:right' type='text' class='span12 typeahead' name=sub_tot_dp[] value='" + All.num(parseInt(value.qtyord * value.dp)) + "' /></td>";
+                                                rowPrd += "<td align=center><a class='btn btn-mini btn-danger'><i class='icon-trash icon-white'></i></a></td>";
+                                                rowPrd += "</tr>";
+                                            });
+                                            $(All.get_active_tab() + " #addPrd").append(rowPrd);
+                                        }
+
                                         pay = pay + payValue;
                                         var rowhtml = "<tr>";
                                         rowhtml += "<td align=center>" + paytypeTxt + "<input type=hidden name=payChooseType[] value=" + paytype + " /></td>";
