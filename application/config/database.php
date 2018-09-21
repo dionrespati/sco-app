@@ -92,9 +92,9 @@ $db['db_sco'] = array(
 $db['db_ecommerce'] = array(
     //'dsn'	=> 'mssql:host=192.168.0.15;dbname=db_ecommerce',
     'dsn' => '',
-    'hostname' => '192.168.0.15',
+    'hostname' => '192.168.22.3',
     'username' => 'sa',
-    'password' => 'Qwerty123',
+    'password' => 'QwertY@123',
     'database' => 'db_ecommerce',
     'dbdriver' => 'sqlsrv',
     //'dbdriver' => 'pdo',
@@ -117,9 +117,9 @@ $db['db_ecommerce'] = array(
 $db['klink_mlm2010'] = array(
     //'dsn'	=> 'mysql:host=192.168.1.2;dbname=tes_newera4',
     'dsn' => '',
-    'hostname' => '192.168.0.15',
+    'hostname' => '192.168.22.3',
     'username' => 'sa',
-    'password' => 'Qwerty123',
+    'password' => 'QwertY@123',
     'database' => 'klink_mlm2010',
     'dbdriver' => 'sqlsrv',
     //'dbdriver' => 'pdo',
